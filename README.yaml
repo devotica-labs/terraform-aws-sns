@@ -1,0 +1,50 @@
+#
+# Canonical configuration for README.md (cloudposse-style doc standard,
+# native to Devotica). Run `make readme` to regenerate the terraform-docs
+# section of README.md.
+#
+
+name: terraform-aws-sns
+license: APACHE2
+github_repo: devotica-labs/terraform-aws-sns
+
+badges:
+  - name: CI
+    image: https://github.com/devotica-labs/terraform-aws-sns/actions/workflows/ci.yml/badge.svg
+    url: https://github.com/devotica-labs/terraform-aws-sns/actions/workflows/ci.yml
+  - name: Release
+    image: https://github.com/devotica-labs/terraform-aws-sns/actions/workflows/release.yml/badge.svg
+    url: https://github.com/devotica-labs/terraform-aws-sns/actions/workflows/release.yml
+  - name: License
+    image: https://img.shields.io/badge/License-Apache_2.0-blue.svg
+    url: LICENSE
+
+related:
+  - name: terraform-aws-kms
+    description: Customer-managed KMS key to back the topic (pass key_arn into kms_master_key_id).
+    url: https://github.com/devotica-labs/terraform-aws-kms
+  - name: terraform-aws-iam
+    description: Publisher roles to grant sns:Publish via policy_principals.
+    url: https://github.com/devotica-labs/terraform-aws-iam
+
+description: |-
+  Terraform module for an **Amazon SNS topic** — the pub/sub fan-out primitive.
+  Ships fintech-safe defaults: server-side encryption on by default via the
+  AWS-managed alias/aws/sns key (or a CMK for BYOK), optional subscriptions, and
+  an optional access policy that grants sns:Publish to named principals while
+  denying any non-TLS access. Supports FIFO topics with content-based dedup.
+
+introduction: |-
+  This module creates an [AWS SNS topic](https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+  with opinionated, fintech-safe defaults. Encryption is on out of the box, and
+  when an access policy is requested it also denies any request that isn't over
+  TLS. Rather than a pass-arbitrary-config engine, it exposes focused inputs:
+  FIFO ordering, a subscriptions map, a KMS key, a delivery policy, and a list of
+  publish principals.
+
+usage: |-
+  See [`examples/complete`](examples/complete) for the full surface (FIFO, CMK,
+  email + sqs subscriptions, publish policy) and [`examples/basic`](examples/basic)
+  for an encrypted topic with a single HTTPS subscription.
+
+contributors: []
