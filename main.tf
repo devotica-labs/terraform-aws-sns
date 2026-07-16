@@ -2,6 +2,9 @@
 # encryption on by default via the AWS-managed alias/aws/sns key (override with a
 # CMK through kms_master_key_id). Optional subscriptions and an access policy
 # that grants sns:Publish to the listed principals and denies any non-TLS access.
+# Default encryption uses the AWS-managed alias/aws/sns key so every topic is
+# encrypted with zero setup; callers can pass a CMK via kms_master_key_id.
+# trivy:ignore:AVD-AWS-0136 AWS-managed-key encryption is the intended default.
 resource "aws_sns_topic" "this" {
   count = local.enabled ? 1 : 0
 
